@@ -24,27 +24,37 @@ client.on('message', msg => {
   }
 
   // Help menu for commands
-  if (msg.content === '!help') {
+  if (msg.content === ('!help')) {
     msg.channel.send('Printbot Help Menu');
     msg.channel.send('_ _');
-    msg.channel.send('!help = show this menu');
-    msg.channel.send('!ver = list current version');
-    msg.channel.send('!listcat = list all categories');
-    msg.channel.send('!listcat [category number] = list all files in a category');
-    msg.channel.send('!link [catrgory] [model name] = get the link to a 3D model, as well as info about it');
-    msg.channel.send('!recent = list the latest 10 projects');
+    msg.channel.send('_ _!help = show this menu');
+    msg.channel.send('_ _!ver = list current version');
+    msg.channel.send('_ _!listcat = list all categories');
+    msg.channel.send('_ _!listcat [category number] = list all files in a category');
+    msg.channel.send('_ _!info [catrgory] [model name] = get the link to a 3D model, as well as info about it');
     msg.channel.send('_ _');
     msg.channel.send('READY.');
   }
 
   // List all categories
   if (msg.content.startsWith('!listcat')) {
-
     const args = msg.content.slice('!listcat'.length).split(' ');
     const command = args.shift().toLowerCase();
     var cat = args[0]
-    console.log(cat)
-    if (cat=undefined) {
+    if (typeof cat != 'undefined') {
+      if (fs.existsSync(dirPath + cat)) {
+        cvar = 0
+        msg.channel.send('3D Models under the "' + cat + '" category:')
+        msg.channel.send('_ _')
+        fs.readdirSync(dirPath + cat).forEach(file => {
+          cvar++
+          msg.channel.send(String(cvar)+'.) '+file);
+        });
+      } else {
+        msg.channel.send('ERROR: ' + cat + ' is not a valid category. Run "!listcat" for a list of categories.')
+      }
+    }
+    if (typeof cat == 'undefined') {
       msg.channel.send('Printbot Categories');
       msg.channel.send('_ _');
       var cvar = 0
@@ -59,9 +69,35 @@ client.on('message', msg => {
     msg.channel.send('READY.');
   }
 
-  // Spin..?
-  if (msg.content === '!spin') {
-    msg.channel.send({files: ["https://raw.githubusercontent.com/sparrdrem/DremJS/master/spin.gif"]});
+  if (msg.content.startsWith('!info')) {
+    const args = msg.content.slice('!info'.length).split(' ');
+    const command = args.shift().toLowerCase();
+    var cat = args[0]
+    var model = args[1]
+    if (fs.existsSync(dirPath + cat + "/" + model)) {
+      fs.readFile(dirPath + cat + "/" + model, "utf8", function(err, data) {
+        msg.channel.send(data);
+        msg.channel.send('READY.')
+      });
+    } else {
+      msg.channel.send('ERROR: ' + cat + ' is not a valid category and/or model. Run "!listcat" for a list of categories and to list models within said categories.');
+      msg.channel.send('READY.')
+    }
+  }
+
+
+  if (msg.content === 'LOAD"*",8,1') {
+    msg.channel.send('SEARCHING FOR *')
+    msg.channel.send('LOADING')
+    var loadedGifFlag=1
+    msg.channel.send('READY.')
+  }
+
+  if (msg.content === 'run') {
+    if (loadedGifFlag=1) {
+      msg.channel.send({files: ["https://raw.githubusercontent.com/sparrdrem/DremJS/master/spin.gif"]});
+    }
+    msg.channel.send('READY.')
   }
 });
 
