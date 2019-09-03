@@ -7,6 +7,7 @@ const HelpMenuEmbed = new Discord.RichEmbed()
   .setAuthor('Printbot', 'https://raw.githubusercontent.com/sparrdrem/printbot/master/_previmg.png')
   .setThumbnail('https://raw.githubusercontent.com/sparrdrem/printbot/master/_previmg.png')
   .addField('Commands:', '_ _')
+  .addBlankField()
   .addField('!help', 'show this menu')
   .addField('!ver', 'list current version')
   .addField('!listcat', 'list all categories \(use `!help listcat` for more detailed view\)')
@@ -17,15 +18,17 @@ const HelpMenuListcatEmbed = new Discord.RichEmbed()
   .setTitle('!listcat Command Information')
   .setAuthor('Printbot', 'https://raw.githubusercontent.com/sparrdrem/printbot/master/_previmg.png')
   .setThumbnail('https://raw.githubusercontent.com/sparrdrem/printbot/master/_previmg.png')
-  .addField('!listcat = show all categories')
-  .addField('!listcat [category] = show all models within the category')
+  .addBlankField()
+  .addField('!listcat = show all categories', '_ _')
+  .addField('!listcat [category] = show all models within the category', '_ _')
 
 const HelpMenuInfoEmbed = new Discord.RichEmbed()
   .setColor('777575')
   .setTitle('!info Command Information')
   .setAuthor('Printbot', 'https://raw.githubusercontent.com/sparrdrem/printbot/master/_previmg.png')
   .setThumbnail('https://raw.githubusercontent.com/sparrdrem/printbot/master/_previmg.png')
-  .addField('Usage: !info [category] [model]')
+  .addBlankField()
+  .addField('Usage: !info [category] [model]', '_ _')
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
@@ -52,23 +55,22 @@ client.on('message', msg => {
   // Help menu for commands
   if (msg.content.startsWith('!help')) {
     // Get arugments
-    const args = msg.content.slice('!listcat'.length).split(' ');
+    const args = msg.content.slice('!help'.length).split(' ');
     const command = args.shift().toLowerCase();
     // Set 1st argument
     var helpcmd = args[0]
     // If the 1st argument is listcat...
-    if (helpcmd==='listcat') {
+    if (helpcmd=='listcat') {
       // Send the help menu for listcat.
       msg.channel.send(HelpMenuListcatEmbed);
     // Else, if the 1st argument is info...
-    } else if (helpcmd==='info') {
+    } else if (helpcmd=='info') {
       // Send the help menu for info
       msg.channel.send(HelpMenuInfoEmbed);
     } else {
     // Else, send the default help menu.
       msg.channel.send(HelpMenuEmbed);
     }
-    msg.channel.send('READY.');
   }
 
   // List all categories
