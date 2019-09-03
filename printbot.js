@@ -46,7 +46,7 @@ client.on('message', msg => {
   // Lists the version and other information
   if (msg.content === '!ver') {
     msg.channel.send('Printbot for Discord.');
-    msg.channel.send('Version 0.00.01.00');
+    msg.channel.send('Version 0.00.02.00');
     msg.channel.send('Created by SparrDrem, 2019-30-08 10:19:25:00');
     msg.channel.send('_ _');
     msg.channel.send('READY.');
