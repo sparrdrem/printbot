@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 // Embed Menu coding
-const HelpMenuEmbed
+const HelpMenuEmbed = new Discord.RichEmbed()
   .setColor('777575') // Sets border color to a nice gray color
   .setTitle('Printbot available commands')
   .setAuthor('Printbot', 'https://raw.githubusercontent.com/sparrdrem/printbot/master/_previmg.png')
