@@ -1,0 +1,10 @@
+{
+        "name": "Printbot",
+        "version": "0.00.01.00",
+        "description": "Printbot for Discord",
+        "main": "printbot.js",
+        "author": "sparrdrem",
+        "dependencies": {
+                "discord.js": "^11.5.1"
+        }
+}
