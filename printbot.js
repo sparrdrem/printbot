@@ -1,5 +1,17 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
+// Embed Menu coding
+const HelpMenuEmbed
+  .setColor('777575') // Sets border color to a nice gray color
+  .setTitle('Printbot available commands')
+  .setAuthor('Printbot', 'https://raw.githubusercontent.com/sparrdrem/printbot/master/_previmg.png')
+  .setThumbnail('https://raw.githubusercontent.com/sparrdrem/printbot/master/_previmg.png')
+  .addField('Commands:')
+  .addBlankField()
+  .addField('!help', 'show this menu')
+  .addField('!ver', 'list current version')
+  .addField('!listcat', 'list all categories \(use `!help listcat` for more detailed view\)')
+  .addField('!info', 'get the link to a 3D model, as well as info about it \(use `!help info` for more detailed view\)')
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
@@ -25,14 +37,15 @@ client.on('message', msg => {
 
   // Help menu for commands
   if (msg.content === ('!help')) {
-    msg.channel.send('Printbot Help Menu');
-    msg.channel.send('_ _');
-    msg.channel.send('_ _!help = show this menu');
-    msg.channel.send('_ _!ver = list current version');
-    msg.channel.send('_ _!listcat = list all categories');
-    msg.channel.send('_ _!listcat [category number] = list all files in a category');
-    msg.channel.send('_ _!info [catrgory] [model name] = get the link to a 3D model, as well as info about it');
-    msg.channel.send('_ _');
+    //msg.channel.send('Printbot Help Menu');
+    //msg.channel.send('_ _');
+    //msg.channel.send('_ _!help = show this menu');
+    //msg.channel.send('_ _!ver = list current version');
+    //msg.channel.send('_ _!listcat = list all categories');
+    //msg.channel.send('_ _!listcat [category number] = list all files in a category');
+    //msg.channel.send('_ _!info [catrgory] [model name] = get the link to a 3D model, as well as info about it');
+    //msg.channel.send('_ _');
+    msg.channel.send(HelpMenuEmbed);
     msg.channel.send('READY.');
   }
 
