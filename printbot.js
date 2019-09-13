@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const fs = require('fs');
 const dirPath = 'categories/';
-var ver = '0.00.03.10'
+var ver = '0.00.03.15'
 var listcat = '!listcat'
 
 client.on('ready', () => {
@@ -89,20 +89,17 @@ client.on('message', msg => {
     var cat = args[0]
     // List all categories
     function compileList(cat) {
-        console.log(cat);
         if (fs.existsSync(dirPath + cat)) {
           var categories = fs.readdirSync(dirPath + cat);
           } else {
               var categories = fs.readdirSync(dirPath);
           }
-        console.log(categories);
       var cvar = 1;
       var compiledList = " ";
       while (cvar<=categories.length) {
           var compiledList = compiledList.concat(cvar + ".) " + categories[cvar-1] + "\n");
           cvar++;
       }
-      console.log(compiledList);
       var categoryList = new Discord.RichEmbed()
           .setColor('777575')
           .setTitle('Printbot Categories')
@@ -151,18 +148,44 @@ client.on('message', msg => {
   }
 
 
+  // Spin..?
+
   if (msg.content === 'LOAD"*",8,1') {
-    msg.channel.send('SEARCHING FOR *')
-    msg.channel.send('LOADING')
     var loadedGifFlag=1
-    msg.channel.send('READY.')
+    var spinLoad = new Discord.RichEmbed()
+      .setColor('777575')
+      .setTitle('**** PRINTBOT 64 BASIC V2 ****')
+      .setAuthor('Printbot', 'https://raw.githubusercontent.com/sparrdrem/printbot/master/_previmg.png')
+      .setThumbnail('https://raw.githubusercontent.com/sparrdrem/printbot/master/_previmg.png')
+      .addField('64K RAM SYSTEM, 38911 BASIC BYTES FREE', '_ _')
+      .addField('_ _', '_ _')
+      .addField('SEARCHING FOR *', '_ _')
+      .addField('LOADING', '_ _')
+      .addField('READY.','_ _')
+    msg.channel.send(spinLoad);
   }
 
-  if (msg.content === 'run') {
-    if (loadedGifFlag=1) {
-      msg.channel.send({files: ["https://raw.githubusercontent.com/sparrdrem/DremJS/master/spin.gif"]});
-    }
-    msg.channel.send('READY.')
+  if (msg.content === 'RUN') {
+    /*if (loadedGifFlag===1) {
+      var loadedGifFlag=0*/
+      var spinRun = new Discord.RichEmbed()
+        .setColor('777575')
+        .setTitle('SPIN.PRG')
+        .setAuthor('Printbot', 'https://raw.githubusercontent.com/sparrdrem/printbot/master/_previmg.png')
+        .setThumbnail('https://raw.githubusercontent.com/sparrdrem/printbot/master/_previmg.png')
+        .setImage('https://raw.githubusercontent.com/sparrdrem/DremJS/master/spin.gif')
+        .addField('READY.', '_ _')
+      msg.channel.send(spinRun);
+    /*} else {
+      var spinRunError = new Discord.RichEmbed()
+        .setColor('777575')
+        .setTitle('**** PRINTBOT 64 BASIC V2 ****')
+        .setAuthor('Printbot', 'https://raw.githubusercontent.com/sparrdrem/printbot/master/_previmg.png')
+        .setThumbnail('https://raw.githubusercontent.com/sparrdrem/printbot/master/_previmg.png')
+        .addField('64K RAM SYSTEM, 38911 BASIC BYTES FREE', '_ _')
+        .addField('READY.', '_ _')
+      msg.channel.send(spinRunError);
+    }*/
   }
 });
 
