@@ -41,3 +41,5 @@ Get information on a 3D model
       |--|3D-Model   // Demo 3D model
          |Template   // Template file
 ```
+
+&copy; Innovation Inc. 2020, SparrDrem 2020
